@@ -1,0 +1,1 @@
+--vim.api.nvim_set_keymap('n', '<C-b>', ':w<CR>:make run<CR>', { noremap = true })
