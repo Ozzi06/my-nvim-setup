@@ -36,24 +36,27 @@ return {
             -- 3. Define the servers you want to use
             -- The KEYS here are the LSP names (used by nvim)
             local servers = {
+                clangd = {},
+                pyright = {},
+                ruff = {
+                    capabilities = {
+                        offsetEncoding = { 'utf-16' },
+                    },
+                },
                 lua_ls = {
                     settings = {
                         Lua = {
                             completion = { callSnippet = 'Replace' },
                             workspace = {
-                                checkThirdParty = false, -- THE FIX: Stop asking/scanning for non-nvim libs
-                                -- Only index the runtime and your config.
-                                -- Lazydev will inject plugin paths dynamically when you open them.
+                                checkThirdParty = false,
                                 library = {
                                     vim.env.VIMRUNTIME,
                                 },
                             },
-                            -- lazydev handles the rest of the workspace settings automatically
                         },
                     },
                 },
-                pyright = {},
-                -- ts_ls = {}, -- Uncomment if you use TypeScript
+                ts_ls = {},
             }
 
             -- 4. Install the servers via Mason

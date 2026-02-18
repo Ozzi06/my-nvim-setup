@@ -1,7 +1,7 @@
 -- Set leader key (must happen before plugins)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-vim.g.have_nerd_font = true
+vim.g.have_nerd_font = false
 
 -- Load core settings
 require('config.options')
@@ -9,7 +9,7 @@ require('config.keymaps')
 
 -- Bootstrap lazy.nvim (the plugin manager)
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
     vim.fn.system({
         'git',
         'clone',
