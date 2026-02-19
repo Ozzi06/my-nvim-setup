@@ -44,3 +44,7 @@ diagnostic.config({
     virtual_text = true, -- This disables the text that appears at the end of the line
     update_in_insert = true,
 })
+
+vim.keymap.set('n', '<leader>f', function()
+    require('conform').format({ async = false, lsp_fallback = true })
+end, { desc = 'Format + Lint fix' })
