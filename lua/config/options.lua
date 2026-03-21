@@ -5,7 +5,7 @@ opt.shiftwidth = 4 -- Indentation uses 4 spaces when auto-indenting
 opt.expandtab = true -- Convert tabs to spaces
 
 opt.number = true
-opt.relativenumber = false
+opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 opt.mouse = 'a'

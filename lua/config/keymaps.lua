@@ -3,19 +3,17 @@ local diagnostic = vim.diagnostic
 local api = vim.api
 local hl = vim.hl
 
---
--- keymap.set('n', '<leader>ld', '<cmd>source %<CR>')
 keymap.set('n', '<leader>ld', ':source %<CR>')
-
--- Clear highlights on search when pressing <Esc> in normal mode
---  See `:help hlsearch`
-keymap.set('n', '<Esc>', ':nohlsearch<CR>')
+vim
+    -- Clear highlights on search when pressing <Esc> in normal mode
+    --  See `:help hlsearch`
+    .keymap
+    .set('n', '<Esc>', ':nohlsearch<CR>')
 
 keymap.set('n', '<leader>cn', ':cnext<CR>')
-keymap.set('n', '<leader>cp', ':cprev<CR>')
 
--- Diagnostic keymaps
-keymap.set('n', '<leader>q', diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+--
+keymap.set('x', '<leader>p', '"_dP')
 
 -- Diagnostic keymaps
 keymap.set('n', '<leader>q', diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })

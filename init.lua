@@ -31,3 +31,6 @@ require('lazy').setup({
         notify = false, -- STOP the annoying "Config Change Detected" messages
     },
 })
+
+-- Load custom logic after plugins are initialized
+require('config.python_scripts').setup()
