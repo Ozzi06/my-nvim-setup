@@ -12,8 +12,11 @@ local function sync_script_venv(bufnr, callback)
     local venv_dir = get_script_venv_dir(filepath)
     local python_path = venv_dir .. '/bin/python'
 
+    if vim.fn.isdirectory(venv_dir) == 1 then
+        vim.fn.delete(venv_dir, 'rf')
+    end
     vim.fn.mkdir(venv_dir, 'p')
-    print('Syncing script dependencies via uv...')
+    print('Cleaning and syncing script venv...')
 
     -- 1. Create venv
     vim.system({ 'uv', 'venv', venv_dir }, { text = true }):wait()
@@ -79,20 +82,22 @@ function M.setup()
                 client.config.settings.python = client.config.settings.python or {}
                 client.config.settings.python.pythonPath = python_exe
                 client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
+                -- Restarting ensures Pyright clears its internal cache of the old venv
+                vim.cmd('LspRestart')
             end
 
             -- Automatically sync if venv is missing
             if vim.fn.executable(python_exe) ~= 1 then
                 sync_script_venv(bufnr, update_lsp_path)
             else
-                -- Venv exists, just update LSP path
-                update_lsp_path()
+                client.config.settings.python.pythonPath = python_exe
+                client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
             end
 
-            -- Add the :PySync command to manually update if you change dependencies
+            -- Manual Sync Command: This now does a CLEAN sync (wipes and reinstalls)
             vim.api.nvim_buf_create_user_command(bufnr, 'PySync', function()
                 sync_script_venv(bufnr, update_lsp_path)
-            end, { desc = 'Update script block venv' })
+            end, { desc = 'Clean and update script block venv' })
         end,
     })
 end
