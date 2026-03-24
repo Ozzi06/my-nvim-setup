@@ -3,6 +3,10 @@ local diagnostic = vim.diagnostic
 local api = vim.api
 local hl = vim.hl
 
+vim.keymap.set('n', '<leader>td', function()
+    vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, { desc = 'Toggle diagnostics' })
+
 keymap.set('n', '<leader>ld', ':source %<CR>')
 vim
     -- Clear highlights on search when pressing <Esc> in normal mode
