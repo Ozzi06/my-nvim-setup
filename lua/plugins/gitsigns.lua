@@ -51,6 +51,15 @@ return {
                 map('n', '<leader>hD', function()
                     gitsigns.diffthis('@')
                 end, { desc = 'git [D]iff against last commit' })
+
+                map('n', '<leader>hN', function()
+                    vim.ui.input({ prompt = 'Diff against HEAD~' }, function(n)
+                        if n then
+                            gitsigns.diffthis('HEAD~' .. n)
+                        end
+                    end)
+                end, { desc = 'git [D]iff against HEAD~n' })
+
                 -- Toggles
                 map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
                 map('n', '<leader>tD', gitsigns.toggle_deleted, { desc = '[T]oggle git show [ ]eleted' })

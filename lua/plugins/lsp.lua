@@ -72,7 +72,20 @@ return {
             -- The KEYS here are the LSP names (used by nvim)
             local servers = {
                 clangd = {},
-                pyright = {},
+                basedpyright = {
+                    settings = {
+                        basedpyright = {
+                            analysis = {
+                                typeCheckingMode = 'standard', -- instead of "all", reduces noise
+                                reportAny = false, -- kills all the "Type Any is not allowed" warnings
+                                reportUnknownVariableType = true,
+                                reportUnknownMemberType = true,
+                                reportUnknownArgumentType = true,
+                                reportMissingTypeStubs = true, -- kills the laspy stub warning
+                            },
+                        },
+                    },
+                },
                 ruff = {
                     capabilities = {
                         offsetEncoding = { 'utf-16' },
@@ -99,7 +112,7 @@ return {
             require('mason-tool-installer').setup({
                 ensure_installed = {
                     'lua-language-server', -- Mapped to lua_ls
-                    'pyright', -- Mapped to pyright
+                    'basedpyright',
                     'stylua', -- Formatter for Lua
                     'ruff',
                     'ruff-lsp',
