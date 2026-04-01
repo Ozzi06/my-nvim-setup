@@ -1,4 +1,5 @@
 -- lua/config/python_scripts.lua
+-- PySync
 local M = {}
 
 local function get_script_venv_dir(filepath)
