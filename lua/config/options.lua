@@ -46,3 +46,5 @@ opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 opt.scrolloff = 15
+
+opt.nrformats:append('alpha')
