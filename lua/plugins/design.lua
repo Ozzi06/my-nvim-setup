@@ -1,17 +1,21 @@
 local function apply_my_theme()
+    local white = '#EAECF0'
+    local blue = '#6FB7FD'
+    local purple = '#bc63e9'
+    local lblue_desat = '#79d2d2'
     local bg_dark = '#1F1F1E'
     local bg_medium = '#252524'
     local bg_light = '#2C2C2A'
     local highlight = '#3B3B39'
     local orange_deep = '#C6613F'
     local orange_yellowish = '#FBAD60'
-    local white = '#EAECF0'
-    local gray = '#7E8595'
-    local purple = '#CA7AF2'
-    local green = '#96E161'
-    local blue = '#6FB7FD'
+    local tsoding_orange = '#B9855A'
+    local gray = '#838389'
+    local lgray = '#C6C7CB'
+    local tsoding_yellow = '#ffdd33'
+    local green = '#88c85b'
+    local blue_desat = '#85b3e0'
     local lblue = '#5EECEC'
-
     vim.cmd('highlight clear')
 
     -- Fix: vim.fn.exists returns 0 or 1. In Lua, 0 is truthy,
@@ -28,26 +32,32 @@ local function apply_my_theme()
     end
 
     -- Syntax
-    hl('Comment', { fg = gray, italic = true })
-    hl('Keyword', { fg = purple, bold = true })
-    hl('Conditional', { fg = orange_yellowish, bold = true })
-    hl('Repeat', { fg = orange_yellowish, bold = true })
-    hl('Function', { fg = blue })
+    hl('Comment', { fg = tsoding_orange, italic = true })
+    hl('Keyword', { fg = tsoding_yellow, bold = false })
+    hl('Conditional', { fg = tsoding_yellow, bold = true })
+    hl('DiagnosticUnnecessary', { fg = gray })
+    hl('Repeat', { fg = tsoding_yellow, bold = true })
+    hl('Function', { fg = blue_desat })
     hl('String', { fg = green })
-    hl('Number', { fg = lblue })
-    hl('Float', { fg = lblue })
-    hl('Boolean', { fg = purple })
-    hl('Identifier', { fg = white })
-    hl('Operator', { fg = white })
-    hl('Delimiter', { fg = white })
-    hl('Constant', { fg = orange_yellowish })
+    hl('Number', { fg = lgray })
+    hl('Float', { fg = lgray })
+    hl('Boolean', { fg = lgray })
+    hl('Identifier', { fg = lgray })
+    hl('Operator', { fg = lgray })
+    hl('Delimiter', { fg = lgray })
+    hl('Constant', { fg = lgray })
+    hl('Variable', { fg = lgray })
     hl('Type', { fg = gray })
-    hl('Special', { fg = white })
+    hl('Special', { fg = lgray })
+
+    hl('@string.documentation', { fg = tsoding_orange, italic = true })
 
     -- Tree-sitter specific groups (The "@" groups)
     -- You can link them to the standard groups you already defined:
     hl('@keyword.conditional', { link = 'Conditional' })
     hl('@keyword.repeat', { link = 'Repeat' })
+    hl('@keyword.operator', { link = 'Operator' })
+    hl('@variable', { link = 'Variable' })
 
     hl('Directory', { fg = gray, bold = true })
     hl('NeoTreeGitAdded', { fg = green })
@@ -61,17 +71,17 @@ local function apply_my_theme()
 
     -- UI
     hl('Normal', { fg = gray, bg = bg_medium })
-    hl('NormalFloat', { fg = white, bg = bg_medium })
+    hl('NormalFloat', { fg = lgray, bg = bg_medium })
     hl('LineNr', { fg = gray })
     hl('CursorLine', { bg = bg_light })
-    hl('CursorLineNr', { fg = white, bg = bg_light })
+    hl('CursorLineNr', { fg = lgray, bg = bg_light })
     hl('Visual', { bg = highlight })
     hl('StatusLine', { fg = gray, bg = bg_medium })
     hl('StatusLineNC', { fg = gray, bg = bg_dark })
     hl('VertSplit', { fg = orange_deep })
     hl('SignColumn', { bg = bg_light })
-    hl('Pmenu', { fg = white, bg = bg_medium })
-    hl('PmenuSel', { fg = white, bg = bg_light })
+    hl('Pmenu', { fg = lgray, bg = bg_medium })
+    hl('PmenuSel', { fg = lgray, bg = bg_light })
 
     -- Todo
     hl('Todo', { fg = bg_dark, bg = orange_yellowish, bold = true })
